@@ -324,31 +324,39 @@ void Game::welcomeMessage()
 
 void Game::selectGame()
 {
-	int choice;
-	std::cout << "Select a game by typing in the number of the game you would like to play: \n";
-	std::cout << "1. Tic Tac Toe\n";
-	std::cout << "2. Connect Four\n";
-	std::cin >> choice;
+	if (currentGame != nullptr)
+	{
+		delete currentGame;
+	}
+	currentGame = nullptr;
 
-	delete currentGame;
+	while (currentGame == nullptr)
+	{
+		int choice;
+		std::cout << "Select a game by typing in the number of the game you would like to play: \n";
+		std::cout << "1. Tic Tac Toe\n";
+		std::cout << "2. Connect Four\n";
+		std::cin >> choice;
 
-	switch (choice)
-	{
-	case 1:
-	{
-		currentGame = new TTT();
-		break;
-	}
-	case 2:
-	{
-		currentGame = new Connect4();
-		break;
-	}
-	default:
-	{
-		std::cout << "invalid selection please try again\n";
-		selectGame();
-	}
+
+		switch (choice)
+		{
+			case 1:
+			{
+				currentGame = new TTT();
+				break;
+			}
+			case 2:
+			{
+				currentGame = new Connect4();
+				break;
+			}
+			default:
+			{
+				std::cout << "invalid selection please try again\n";
+				selectGame();
+			}
+		}
 	}
 }
 
