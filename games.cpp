@@ -327,8 +327,8 @@ void Game::selectGame()
 	if (currentGame != nullptr)
 	{
 		delete currentGame;
+		currentGame = nullptr;
 	}
-	currentGame = nullptr;
 
 	while (currentGame == nullptr)
 	{
@@ -354,7 +354,6 @@ void Game::selectGame()
 			default:
 			{
 				std::cout << "invalid selection please try again\n";
-				selectGame();
 			}
 		}
 	}
