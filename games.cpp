@@ -1,6 +1,20 @@
 #include "games.h"
 //TTT Game
 
+TTT::~TTT()
+{
+	if (board != nullptr)
+	{
+		for (int i = 0; i < 3; i++)
+		{
+			delete[] board[i];
+			delete[] spotCheck[i];
+		}
+		delete[] board;
+		delete[] spotCheck;
+	}
+}
+
 void TTT::printBoard()
 {
 	std::cout << std::endl;
@@ -84,6 +98,26 @@ bool TTT::checkWin()
 
 void TTT::setBoard()
 {
+	if (board != nullptr)
+	{
+		for (int i = 0; i < 3; i++)
+		{
+			delete[] board[i];
+			delete[] spotCheck[i];
+		}
+		delete[] board;
+		delete[] spotCheck;
+	}
+
+	board = new char* [3];
+	spotCheck = new bool* [3];
+
+	for (int i = 0; i < 3; i++)
+	{
+		board[i] = new char[3];
+		spotCheck[i] = new bool[3];
+	}
+
 	char num = '0';
 	for (int i = 0; i < 3; i++)
 	{
@@ -94,13 +128,31 @@ void TTT::setBoard()
 		}
 	}
 
-
-	memset(spotCheck, false, sizeof(spotCheck));
+	for (int i = 0; i < 3; i++)
+	{
+		for (int j = 0; j < 3; j++)
+		{
+			spotCheck[i][j] = false;
+		}
+	}
 }
 
 
 //Connect4
 
+Connect4::~Connect4()
+{
+	if (board != nullptr)
+	{
+		for (int i = 0; i < 6; i++)
+		{
+			delete[] board[i];
+			delete[] spotCheck[i];
+		}
+		delete[] board;
+		delete[] spotCheck;
+	}
+}
 
 void Connect4::printBoard()
 {
@@ -208,6 +260,27 @@ bool Connect4::checkWin()
 
 void Connect4::setBoard()
 {
+
+	if (board != nullptr)
+	{
+		for (int i = 0; i < 6; i++)
+		{
+			delete[] board[i];
+			delete[] spotCheck[i];
+		}
+		delete[] board;
+		delete[] spotCheck;
+	}
+
+	board = new char* [6];
+	spotCheck = new bool* [6];
+
+	for (int i = 0; i < 6; i++)
+	{
+		board[i] = new char[7];
+		spotCheck[i] = new bool[7];
+	}
+
 	for (int i = 0; i < 6; ++i)
 	{
 		for (int j = 0; j < 7; ++j)
@@ -215,7 +288,14 @@ void Connect4::setBoard()
 			board[i][j] = '-';
 		}
 	}
-	memset(spotCheck, false, sizeof(spotCheck));
+
+	for (int i = 0; i < 6; i++)
+	{
+		for (int j = 0; j < 7; j++)
+		{
+			spotCheck[i][j] = false;
+		}
+	}
 }
 
 //Game
