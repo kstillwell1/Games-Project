@@ -5,6 +5,15 @@
 #include <string>
 #include "player.h"
 
+class Board
+{
+protected:
+	char** board = nullptr;
+	bool** spotCheck = nullptr;
+
+	virtual ~Board() {};
+};
+
 class IGame
 {
 public:
@@ -14,17 +23,13 @@ public:
 	virtual void replace(bool turn) = 0;
 	virtual bool checkWin() = 0;
 	virtual void setBoard() = 0;
-	virtual ~IGame() {}
+	virtual ~IGame() {};
 };
 
-class TTT : public IGame
+class TTT : public IGame , public Board
 {
-private:
-
-	char board[3][3];
-	bool spotCheck[3][3];
-
 public:
+	~TTT();
 
 	void printBoard() override;
 	bool checkTie() override;
@@ -34,13 +39,11 @@ public:
 	void setBoard() override;
 };
 
-class Connect4 : public IGame
+class Connect4 : public IGame , public Board
 {
-private:
-	char board[6][7];
-	bool spotCheck[6][7];
-
 public:
+	~Connect4();
+
 	void printBoard() override;
 	bool checkTie() override;
 	bool checkSpot(int spot) override;
